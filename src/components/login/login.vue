@@ -46,6 +46,7 @@ export default {
         // 登陆成功，将服务器签发给用户的Token 身份令牌记录到 localSorage中
         // 其他需要使用Token的都去本地存储获取
         window.localStorage.setItem('admin-token', JSON.stringify(data.data))
+        console.log(res)
         this.$router.push({
           name: 'home'
         })

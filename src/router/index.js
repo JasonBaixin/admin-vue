@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Login from '@/components/login/login'
 import Home from '@/components/home/home'
+
+import UserList from '@/components/user-list/user-list'
 
 Vue.use(Router)
 
@@ -13,9 +16,16 @@ const router = new Router({
       component: Login
     },
     {
-      name: 'home',
+      name: 'home', // home 组件会渲染到 App.vue 根组件中的 router-view中
       path: '/',
-      component: Home
+      component: Home, // 此处为cmoponent。
+      children: [
+        {
+          name: 'user-list',
+          path: '/users',
+          components: UserList
+        }
+      ]
     }
   ]
 })
