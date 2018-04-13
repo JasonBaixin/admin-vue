@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios'// axios配置请求头携带token令牌请求用户列表数据并渲染到表格组件中
 export default {
   async created () {
     const {token} = JSON.parse(window.localStorage.getItem('admin-token'))
