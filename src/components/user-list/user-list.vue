@@ -50,14 +50,19 @@
 </template>
 
 <script>
-import axios from 'axios'// axios配置请求头携带token令牌请求用户列表数据并渲染到表格组件中
+
 import {getToken} from '@/assets/js/auth'
 export default {
   async created () {
     const token = getToken()
-    const res = await axios.get('http://localhost:8888/api/private/v1/users', {
+    // 1. 请求地址写死了，不好改
+    // 2. 每次使用 axios 都手动 import 非常麻烦
+    //    我们可以把 axios 实例注入到 Vue 实例中
+    //    然后我们就可以通过 Vue 组件实例来访问 axios 实例了
+    // 3. 除了登陆接口不需要授权用户令牌，其它都需要
+    const res = await this.$http.get('/users', {
       headers: { // axios 支持通过配置对象的 headers 选项来定义请求头
-        Authorization: token // 配置请求头携带身份令牌，Authorization 是服务器要求的字段名称，token是我们通过用户名+密码从服务器得来的身份令牌
+        Authorization: token // 配置请求头携带身份令牌，Authorization 是服务器要求的字段名称，token是我们通过用户名密码从服务器得来的身份令牌
       },
       params: { // 请求参数，对象会被转换为 k=v&k=v 的格式，然后拼接到请求路径 ? 后面发起请求
         pagenum: 1,
