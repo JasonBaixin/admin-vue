@@ -24,7 +24,7 @@
 
 <script>
 import axios from 'axios'
-
+import {saveUserInfo} from '@/assets/js/auth'
 export default {
   data () {
     return {
@@ -43,9 +43,10 @@ export default {
       const res = await axios.post('http://localhost:8888/api/private/v1/login', this.userForm)
       const data = res.data
       if (data.meta.status === 200) {
-        // 登陆成功，将服务器签发给用户的Token 身份令牌记录到 localSorage中
+        // 登陆成功，我们把服务器发给我们当前登录的用户信息存储到本地存储中
         // 其他需要使用Token的都去本地存储获取
-        window.localStorage.setItem('admin-token', JSON.stringify(data.data))
+        saveUserInfo(data.data)
+        // 导航到 home组件中
         console.log(res)
         this.$router.push({
           name: 'home'

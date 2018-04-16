@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import {getUserInfo} from '@/assets/js/auth'
 
 import Login from '@/components/login/login'
 import Home from '@/components/home/home'
@@ -55,9 +56,8 @@ router.beforeEach((to, from, next) => {
   if (to.name === 'login') {
     next()
   } else {
-    // 检查登陆状态令牌
-    const token = window.localStorage.getItem('admin-token')
-    if (!token) { // 无令牌，则让其登陆去
+    // 检查是否具有登录的用户信息转状态
+    if (!getUserInfo()) { // 无令牌，则让其登陆去
       next({
         name: 'login'
       })
