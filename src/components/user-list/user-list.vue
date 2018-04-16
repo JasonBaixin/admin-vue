@@ -34,7 +34,29 @@
     </el-table-column>
     <el-table-column
       prop="mobile"
-      label="电话">
+      label="电话"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      label="用户状态"
+      width="100">
+      <template slot-scope="scope">
+        <!-- 我们在这里可以通过 scope.row 拿到当前遍历行对象 -->
+        <el-switch
+          v-model="scope.row.mg_state"
+          active-color="#13ce66"
+          inactive-color="#ff4949">
+        </el-switch>
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="操作"
+      width="200">
+      <template slot-scope="scope">
+        <el-button size="mini" type="primary" icon="el-icon-edit"></el-button>
+        <el-button size="mini" type="danger" icon="el-icon-delete"></el-button>
+        <el-button size="mini" type="danger" icon="el-icon-delete"></el-button>
+      </template>
     </el-table-column>
   </el-table>
   <!--
